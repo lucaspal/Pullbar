@@ -96,4 +96,6 @@ Files:
 | `Sources/PRInbox/Keychain.swift` | Generic-password storage |
 | `Sources/PRInbox/Settings.swift` | UserDefaults-backed settings |
 | `Packaging/Info.plist` | Bundle metadata, `LSUIElement` (no Dock icon) |
+| `Packaging/AppIcon-1024.png` | High-resolution source artwork for the app icon |
+| `Packaging/build-icon.sh` | Generates the standard macOS `.icns` sizes during packaging |
 | `Makefile` | build / run / app / install |

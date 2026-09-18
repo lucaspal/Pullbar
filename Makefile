@@ -4,6 +4,8 @@ APP := $(BUILD_DIR)/$(APP_NAME).app
 
 .PHONY: build run app install clean
 
+APP_ICON := $(BUILD_DIR)/AppIcon.icns
+
 ## Compile a release binary into .build/release/PRInbox
 build:
 	swift build -c release
@@ -13,14 +15,19 @@ run:
 	swift run -c release PRInbox
 
 ## Assemble a double-clickable, ad-hoc signed "$(APP_NAME).app" in build/
-app: build
+app: build $(APP_ICON)
 	rm -rf "$(APP)"
 	mkdir -p "$(APP)/Contents/MacOS" "$(APP)/Contents/Resources"
 	cp .build/release/PRInbox "$(APP)/Contents/MacOS/PRInbox"
 	cp Packaging/Info.plist "$(APP)/Contents/Info.plist"
+	cp "$(APP_ICON)" "$(APP)/Contents/Resources/AppIcon.icns"
 	echo -n "APPL????" > "$(APP)/Contents/PkgInfo"
 	codesign --force --sign - --identifier dev.prinbox.menubar "$(APP)"
 	@echo "Built $(APP)"
+
+$(APP_ICON): Packaging/AppIcon-1024.png Packaging/build-icon.sh
+	mkdir -p "$(BUILD_DIR)"
+	sh Packaging/build-icon.sh "$<" "$@"
 
 ## Copy the app to ~/Applications and launch it
 install: app
