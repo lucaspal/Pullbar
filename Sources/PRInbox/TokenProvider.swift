@@ -1,6 +1,19 @@
 import AppKit
 import Foundation
 
+/// Ensures standard paste works even though PR Inbox has no main Edit menu.
+private final class TokenTextField: NSSecureTextField {
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        let isPaste = event.modifierFlags.intersection(.deviceIndependentFlagsMask) == .command
+            && event.charactersIgnoringModifiers?.lowercased() == "v"
+        if isPaste {
+            currentEditor()?.paste(nil)
+            return true
+        }
+        return super.performKeyEquivalent(with: event)
+    }
+}
+
 /// Finds a GitHub token: Keychain first, then a logged-in `gh` CLI, then a prompt.
 enum TokenProvider {
     static func fromGhCLI() async -> String? {
@@ -37,7 +50,7 @@ enum TokenProvider {
         if let reason { text = reason + "\n\n" + text }
         alert.informativeText = text
 
-        let field = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 380, height: 24))
+        let field = TokenTextField(frame: NSRect(x: 0, y: 0, width: 380, height: 24))
         field.placeholderString = "ghp_… or github_pat_…"
         alert.accessoryView = field
         alert.addButton(withTitle: "Save")

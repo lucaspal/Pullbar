@@ -21,6 +21,8 @@ Clicking a row opens the PR in your browser.
 The menu bar title reads `5` (needs your review), `5+1` (plus one team request)
 and adds `⚠︎1` when one of your own PRs needs action. Hovering shows all six counts.
 
+![PR Inbox menu example](PRInbox-screenshot-example.png)
+
 ## Requirements
 
 - macOS 13 Ventura or newer
@@ -32,7 +34,6 @@ No third-party dependencies: AppKit, Foundation, Security and ServiceManagement 
 ## Build and run
 
 ```sh
-cd tools/pr-inbox-menubar
 make install        # builds "PR Inbox.app", copies it to ~/Applications and opens it
 ```
 
