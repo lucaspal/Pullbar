@@ -1,11 +1,11 @@
-# PR Inbox
+# pullbar
 
-PR Inbox is a native macOS menu bar app for checking your open GitHub pull
+pullbar is a native macOS menu bar app for checking your open GitHub pull
 requests without opening a browser. It reads GitHub's GraphQL API and presents
 six inbox-style sections in a menu-bar popover. It has no Dock icon or main
 window.
 
-![PR Inbox menu example](PRInbox-screenshot-example.png)
+![pullbar menu example](pullbar-screenshot.png)
 
 ## What it shows
 
@@ -52,14 +52,14 @@ make install
 ```
 
 `make install` builds a release app bundle, installs it as
-`~/Applications/PR Inbox.app`, and opens it. The bundle is ad-hoc signed, so
+`~/Applications/pullbar.app`, and opens it. The bundle is ad-hoc signed, so
 macOS may ask you to confirm its first launch.
 
 | Command | Result |
 |---|---|
 | `make build` | Builds the release executable in `.build/release/`. |
 | `make run` | Builds and runs the release executable directly, without an app bundle. |
-| `make app` | Creates the ad-hoc-signed `build/PR Inbox.app` bundle. |
+| `make app` | Creates the ad-hoc-signed `build/pullbar.app` bundle. |
 | `make install` | Creates the bundle, copies it to `~/Applications`, and opens it. |
 | `make clean` | Removes `.build` and `build`. |
 
@@ -70,7 +70,7 @@ bundle, including the one installed by `make install`.
 
 At launch, the app obtains a token in this order:
 
-1. A token stored in the login Keychain under the PR Inbox GitHub-token item.
+1. A token stored in the login Keychain under the pullbar GitHub-token item.
 2. The output of `gh auth token`, if the GitHub CLI is installed and logged in.
 3. A secure token prompt.
 
@@ -83,7 +83,7 @@ want to see. The required scopes or fine-grained permissions depend on the
 private repositories and organisations involved; GitHub reports insufficient
 permission as an error in the menu.
 
-PR Inbox stores the saved token in Keychain. Its update-window and refresh
+pullbar stores the saved token in Keychain. Its update-window and refresh
 interval preferences are stored in the app's `UserDefaults`; it does not store
 pull-request results on disk.
 
@@ -97,7 +97,7 @@ pull-request results on disk.
 - **Refresh every** schedules automatic refreshes every 1, 2 (the default), 5,
   or 15 minutes.
 - **Launch at login** enables or disables the packaged app's macOS login item.
-- **Quit PR Inbox** quits the app (**⌘Q**).
+- **Quit pullbar** quits the app (**⌘Q**).
 
 When a fetch fails, the menu shows the error and provides **Set GitHub token…**
 to update credentials.
@@ -118,13 +118,13 @@ count include every context GitHub returns for that rollup.
 
 | Path | Purpose |
 |---|---|
-| `Sources/PRInbox/PRInboxApp.swift` | Application entry point and menu-bar-only activation policy. |
-| `Sources/PRInbox/AppDelegate.swift` | Menu, status title, refresh scheduling, and menu actions. |
-| `Sources/PRInbox/GitHubClient.swift` | GitHub GraphQL client and pagination. |
-| `Sources/PRInbox/InboxService.swift` | The three concurrent searches. |
-| `Sources/PRInbox/Models.swift` | Pull-request models and section classification. |
-| `Sources/PRInbox/TokenProvider.swift` | Keychain, GitHub CLI, and token-prompt lookup. |
-| `Sources/PRInbox/Keychain.swift` | Login-Keychain storage. |
-| `Sources/PRInbox/Settings.swift` | `UserDefaults` settings. |
+| `Sources/pullbar/PullbarApp.swift` | Application entry point and menu-bar-only activation policy. |
+| `Sources/pullbar/AppDelegate.swift` | Menu, status title, refresh scheduling, and menu actions. |
+| `Sources/pullbar/GitHubClient.swift` | GitHub GraphQL client and pagination. |
+| `Sources/pullbar/InboxService.swift` | The three concurrent searches. |
+| `Sources/pullbar/Models.swift` | Pull-request models and section classification. |
+| `Sources/pullbar/TokenProvider.swift` | Keychain, GitHub CLI, and token-prompt lookup. |
+| `Sources/pullbar/Keychain.swift` | Login-Keychain storage. |
+| `Sources/pullbar/Settings.swift` | `UserDefaults` settings. |
 | `Packaging/` | App metadata and icon-build script. |
 | `Makefile` | Build, bundle, install, and clean targets. |

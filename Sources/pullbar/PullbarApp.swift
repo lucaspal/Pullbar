@@ -3,7 +3,7 @@ import AppKit
 /// Entry point. `@MainActor` so the main-actor `AppDelegate` can be created
 /// synchronously here (top-level code in a `main.swift` is nonisolated).
 @main
-enum PRInboxApp {
+enum PullbarApp {
     @MainActor
     static func main() {
         let app = NSApplication.shared

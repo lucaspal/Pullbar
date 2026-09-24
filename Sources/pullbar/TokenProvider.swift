@@ -1,7 +1,7 @@
 import AppKit
 import Foundation
 
-/// Ensures standard paste works even though PR Inbox has no main Edit menu.
+/// Ensures standard paste works even though pullbar has no main Edit menu.
 private final class TokenTextField: NSSecureTextField {
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
         let isPaste = event.modifierFlags.intersection(.deviceIndependentFlagsMask) == .command
@@ -40,7 +40,7 @@ enum TokenProvider {
     static func prompt(reason: String? = nil) -> String? {
         let alert = NSAlert()
         alert.alertStyle = .informational
-        alert.messageText = "GitHub token for PR Inbox"
+        alert.messageText = "GitHub token for pullbar"
         var text = """
         Paste a personal access token. It is stored only in your login Keychain.
 
