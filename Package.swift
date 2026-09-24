@@ -2,12 +2,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "PRInbox",
+    name: "pullbar",
     platforms: [.macOS(.v13)],
     targets: [
         .executableTarget(
-            name: "PRInbox",
-            path: "Sources/PRInbox",
+            name: "pullbar",
+            path: "Sources/pullbar",
             linkerSettings: [
                 .linkedFramework("AppKit"),
                 .linkedFramework("Security"),

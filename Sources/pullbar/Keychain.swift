@@ -10,7 +10,7 @@ struct KeychainError: LocalizedError {
 
 /// Stores the GitHub token as a generic password in the user's login keychain.
 enum Keychain {
-    private static let service = "PRInbox GitHub token"
+    private static let service = "pullbar GitHub token"
     private static let account = "github.com"
 
     private static var baseQuery: [String: Any] {
@@ -36,7 +36,7 @@ enum Keychain {
         deleteToken()
         var attrs = baseQuery
         attrs[kSecValueData as String] = Data(token.utf8)
-        attrs[kSecAttrLabel as String] = "PR Inbox (GitHub)"
+        attrs[kSecAttrLabel as String] = "pullbar (GitHub)"
         let status = SecItemAdd(attrs as CFDictionary, nil)
         guard status == errSecSuccess else { throw KeychainError(status: status) }
     }
