@@ -122,7 +122,7 @@ final class GitHubClient: @unchecked Sendable {
         request.httpMethod = "POST"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("PRInbox-menubar", forHTTPHeaderField: "User-Agent")
+        request.setValue("pullbar-menubar", forHTTPHeaderField: "User-Agent")
         let cleanVars = variables.compactMapValues { $0 }
         request.httpBody = try JSONSerialization.data(withJSONObject: ["query": query, "variables": cleanVars])
 
@@ -259,7 +259,7 @@ enum GQL {
     """
 
     static let searchQuery = """
-    query PRInboxSearch($q: String!, $first: Int!, $after: String) {
+    query PullbarSearch($q: String!, $first: Int!, $after: String) {
       viewer { login }
       search(query: $q, type: ISSUE, first: $first, after: $after) {
         issueCount
@@ -274,7 +274,7 @@ enum GQL {
     """
 
     static let contextsQuery = """
-    query PRInboxContexts($id: ID!, $after: String!) {
+    query PullbarContexts($id: ID!, $after: String!) {
       node(id: $id) {
         ... on PullRequest {
           commits(last: 1) {

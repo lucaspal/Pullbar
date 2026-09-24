@@ -27,7 +27,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             button.image = NSImage(systemSymbolName: "arrow.triangle.pull", accessibilityDescription: "Pull requests")
             button.imagePosition = .imageLeading
             button.title = "…"
-            button.toolTip = "PR Inbox — loading"
+            button.toolTip = "pullbar — loading"
         }
         menu.delegate = self
         menu.autoenablesItems = false
@@ -172,7 +172,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.addItem(launchAtLoginItem())
         menu.addItem(makeItem("Set GitHub token…", #selector(setToken)))
         menu.addItem(.separator())
-        menu.addItem(makeItem("Quit PR Inbox", #selector(quit), key: "q"))
+        menu.addItem(makeItem("Quit pullbar", #selector(quit), key: "q"))
     }
 
     private func sectionHeader(_ title: String, count: Int?) -> NSMenuItem {
@@ -289,7 +289,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         item.isEnabled = isBundle
         item.state = isBundle && SMAppService.mainApp.status == .enabled ? .on : .off
         if !isBundle {
-            item.toolTip = "Available when running the packaged PR Inbox.app (see make app)."
+            item.toolTip = "Available when running the packaged pullbar.app (see make app)."
         }
         return item
     }
