@@ -128,3 +128,8 @@ count include every context GitHub returns for that rollup.
 | `Sources/pullbar/Settings.swift` | `UserDefaults` settings. |
 | `Packaging/` | App metadata and icon-build script. |
 | `Makefile` | Build, bundle, install, and clean targets. |
+| `LICENSE` | MIT license terms. |
+
+## License
+
+pullbar is available under the [MIT License](LICENSE).
